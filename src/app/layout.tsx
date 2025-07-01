@@ -32,7 +32,9 @@ export default function RootLayout({
       > 
 
         <Header/>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <main className="text-center">{children}</main>
+        </QueryProvider>
         <Footer/>
       </body>
     </html>
