@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "./_components/Footer";
 import Header from "./_components/Header";
 import QueryProvider from "./_components/QueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header/>
         <QueryProvider>
           <main className="text-center">{children}</main>
+          <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
         </QueryProvider>
         <Footer/>
       </body>
