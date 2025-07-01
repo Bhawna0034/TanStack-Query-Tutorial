@@ -6,9 +6,10 @@ const api = axios.create({
 
 export const fetchPosts = async() => {
     const response = await api.get("/posts");
-     if (response.status !== 200) {
-      return [];
-    } else {
-      return response.data;
+    if(response.status !== 200){
+        return [];
+    }else{
+        return response.data;
     }
+
 }
