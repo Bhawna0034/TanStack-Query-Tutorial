@@ -4,8 +4,8 @@ const api = axios.create({
     baseURL: "https://jsonplaceholder.typicode.com"
 });
 
-export const fetchPosts = async() => {
-    const response = await api.get("/posts?_start=0&_limit=6");
+export const fetchPosts = async(pageNumber: number) => {
+    const response = await api.get(`/posts?_start=${pageNumber}&_limit=3`);
     if(response.status !== 200){
         return [];
     }else{
