@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 export const fetchPosts = async() => {
-    const response = await api.get("/posts");
+    const response = await api.get("/posts?_start=0&_limit=6");
     if(response.status !== 200){
         return [];
     }else{
