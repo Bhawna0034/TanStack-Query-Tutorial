@@ -8,8 +8,10 @@ const FETCHRQ = () => {
   const { data, isLoading, error } = useQuery<PostProps[]>({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    staleTime: 3000,
-    gcTime: 5000,
+    // staleTime: 3000,
+    // gcTime: 5000,
+    refetchInterval: 1000,
+    refetchIntervalInBackground:true
   });
 
   if (isLoading){
