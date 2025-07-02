@@ -34,7 +34,7 @@ export default function RootLayout({
 
         <Header/>
         <QueryProvider>
-          <main className="text-center">{children}</main>
+          <main>{children}</main>
           <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
         </QueryProvider>
         <Footer/>

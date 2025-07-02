@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { fetchPosts } from "../api/api";
 import { PostProps } from "../lib/types";
+import Link from "next/link";
 
 const FETCHRQ = () => {
   const { data, isLoading, error } = useQuery<PostProps[]>({
@@ -32,8 +33,10 @@ const FETCHRQ = () => {
       <ul className="flex flex-col gap-2">
         {data?.map((post) => (
           <li key={post.id} className="border-l-2 border-gray-200 bg-gray-500">
+            <Link href={`/rq/${post.id}`}>
             <h3>{post.title}</h3>
             <p>{post.body}</p>
+            </Link>
           </li>
         ))}
       </ul>
