@@ -35,3 +35,8 @@ export const createPost = async(post: PostProps): Promise<PostProps> => {
     const response =  await api.post('/posts', post);
     return response.data;
 }
+
+// update post
+export const updatePostById = async(id: number, updates: Partial<PostProps>) => {
+    return await api.patch(`/posts/${id}`, updates);
+}

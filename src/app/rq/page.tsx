@@ -1,7 +1,7 @@
 "use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { createPost, deletePostById, getPosts } from "../api/api";
+import { createPost, deletePostById, getPosts, updatePostById } from "../api/api";
 import { PostProps } from "../lib/types";
 import Link from "next/link";
 import NewPost from "../_components/NewPost";
@@ -44,6 +44,19 @@ const FETCHRQ = () => {
     }
     
   })
+
+const updateMutation = useMutation({
+  mutationFn: ({ id, updates }: { id: number; updates: Partial<PostProps> }) =>
+    updatePostById(id, updates),
+  onSuccess: (response, { id }) => {
+    queryClient.setQueryData<PostProps[]>(["posts", pageNumber], (postData) =>
+      postData?.map((post) =>
+        post.id === id ? { ...post, ...response.data } : post
+      )
+    );
+  },
+});
+
   // const handleDeletePost = (id: number) => {
   //   console.log("Delete Post: ", id);
   // }
@@ -101,12 +114,24 @@ const FETCHRQ = () => {
                   </h3>
                   <p className="mb-4">{post.body}</p>
                 </Link>
+                <div className="flex items-center gap-4">
                 <button
                   onClick={() => deleteMutation.mutate(post.id)}
                   className="bg-green-600 hover:bg-emerald-700 focus:scale-[1.02] cursor-pointer px-3 py-2 rounded-lg"
                 >
                   Delete
                 </button>
+                 <button
+                  onClick={() => updateMutation.mutate({
+                    id: post.id,
+                    updates: {title: "Updated Title"},
+                  })
+                }
+                  className="bg-green-600 hover:bg-emerald-700 focus:scale-[1.02] cursor-pointer px-3 py-2 rounded-lg"
+                >
+                  Update
+                </button>
+                </div>
               </li>
             ))}
           </ul>
