@@ -1,4 +1,5 @@
 import axios from "axios";
+import { PostProps } from "../lib/types";
 
 const api = axios.create({
     baseURL: "https://jsonplaceholder.typicode.com"
@@ -27,4 +28,10 @@ export const getPostById = async(id: string | number) => {
 // delete post by id
 export const deletePostById = async(id: number) => {
     return api.delete(`/posts/${id}`);
+}
+
+// create post
+export const createPost = async(post: PostProps): Promise<PostProps> => {
+    const response =  await api.post('/posts', post);
+    return response.data;
 }
