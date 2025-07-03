@@ -1,6 +1,6 @@
 
 "use client";
-import { fetchPostById } from "@/app/api/api";
+import { getPostById } from "@/app/api/api";
 import { PostProps } from "@/app/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ const PostDetailPage = () => {
     const id = params?.id as string;
   const { data, isLoading, isError } = useQuery<PostProps>({
     queryKey: ["post", id],
-    queryFn: () => fetchPostById(id),
+    queryFn: () => getPostById(id),
   });
 
   const handleBackToPosts = () => {
